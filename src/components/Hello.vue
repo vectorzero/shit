@@ -1,21 +1,22 @@
 <template>
-  <div class="hello">
-    <div class="articleDiv">
-      <h3>Article</h3>
-      <h4>{{ title }} --- {{ author }}</h4>
-      <div @click="dialogVisible = true">{{ digest }}...</div>
-      <el-button type="primary" @click="changeArticle">换一篇</el-button>
-    </div>
-    <div class="article">
-      <el-dialog
-        :title="title"
-        :visible.sync="dialogVisible">
-        <h4>作者：{{ author }}</h4>
-        <p v-html="article"></p>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">关  闭</el-button>
-        </span>
-      </el-dialog>
+  <div>
+    <group>
+      <x-switch v-model="show" :title="title" :inline-desc="author"></x-switch>
+    </group>
+    <group>
+      <x-button type="primary" @click.native='getArticle()'>换一篇</x-button>
+    </group>
+    <div v-transfer-dom>
+      <x-dialog v-model="show" class="dialog-demo" hide-on-blur>
+        <div class="content">
+          <p class="dialog-title">{{ title }}</p>
+          <p>{{ author }}</p>
+          <p class="article" v-html="article"></p>
+        </div>
+        <div @click="show=false">
+          <span class="vux-close"></span>
+        </div>
+      </x-dialog>
     </div>
     <!-- <ul>
       <li v-for='cat in catList'>
@@ -27,6 +28,8 @@
 </template>
 
 <script>
+import { XDialog, XButton, Group, XSwitch } from 'vux'
+import { TransferDomDirective as TransferDom } from 'vux'
 export default {
   name: 'hello',
   data () {
@@ -36,8 +39,18 @@ export default {
       title: '',
       article: '',
       dialogVisible: false,
-      catList: []
+      catList: [],
+      show: false
     }
+  },
+  directives: {
+    TransferDom
+  },
+  components: {
+    XDialog,
+    XButton,
+    Group,
+    XSwitch
   },
   methods: {
     getShit() {
@@ -77,39 +90,14 @@ export default {
 </script>
 
 <style scoped>
-  .hello {
-    height: 100%;
-  }
-  .articleDiv {
-    font-size: 1em;
-    position: relative;
-    border: 1px solid #fff;
-    background: #fff;
-    box-shadow: 4px 4px 4px 4px #ccc;
-    width: 50%;
-    height: 50%;
-    margin-left: 25%;
-    padding: 10px 20px;
-    overflow: auto;
-    text-align: center;
-    cursor: pointer;
-  }
-  button {
-    position: absolute;
-    bottom: 10px;
-    right: 50px;
-    z-index: 555;
-    cursor: pointer;
-  }
   .article {
-    text-align: center;
-  }
-  h4 {
-      margin-bottom: 5px;
-    }
-  p{
-    text-align: left;
     text-indent: 2em;
-    line-height: 2.5;
+    text-align: left;
+  }
+  .content {
+     height:400px;
+     padding:30px;
+     overflow:scroll;
+     -webkit-overflow-scrolling:touch;
   }
 </style>
