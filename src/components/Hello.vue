@@ -1,6 +1,6 @@
 <template>
   <div>
-    <group>
+    <!-- <group>
       <selector v-model="value1" title="城市" :options="plainList" @on-change="onChange"></selector>
     </group>
     <group>
@@ -24,7 +24,7 @@
            <svg class="icon"><use xlink:href="#icon-yu"></use></svg>
         </span>
       </cell>
-    </group>
+    </group> -->
     <group>
       <x-switch v-model="show" :title="title" :inline-desc="author"></x-switch>
     </group>
@@ -119,7 +119,7 @@ export default {
       //CHGD040000 汕头
       //CHGD070000 佛山
       //build
-      //this.$http.get('//tj.nineton.cn/Heart/index/all?city='+val)
+      //this.$http.get('http://tj.nineton.cn/Heart/index/all?city='+val)
       //dev
       this.$http.get('/weather/all?city='+val)
         .then(function(res){
@@ -154,7 +154,7 @@ export default {
   mounted() {
     //this.getShit();
     this.getArticle();
-    this.getWeather(this.value1);
+    //this.getWeather(this.value1);
   }
 }
 </script>
