@@ -41,7 +41,14 @@ module.exports = {
         pathRewrite: {
           '^/article': ''
         }
-      }
+      },
+      '/weather': {
+        target: 'http://tj.nineton.cn/Heart/index/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/weather': ''
+        }
+      },
 	  // '/shit': {
 	  //   target: 'http://locahost:3000',
 	  //   changeOrigin: true,
