@@ -54,7 +54,7 @@ export default {
     },
     getArticle() {
       let _this = this;
-      this.$http.get('/article/random?dev=1')
+      this.$http.get('https://interface.meiriyiwen.com/article/random?dev=1')
         .then(function(res){
           _this.article = res.data.data.content;
           _this.title = res.data.data.title;
