@@ -119,7 +119,7 @@ export default {
       //CHGD040000 汕头
       //CHGD070000 佛山
       //build
-      //this.$http.get('http://tj.nineton.cn/Heart/index/all?city='+val)
+      //this.$http.get('//tj.nineton.cn/Heart/index/all?city='+val)
       //dev
       this.$http.get('/weather/all?city='+val)
         .then(function(res){
