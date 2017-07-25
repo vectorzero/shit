@@ -28,10 +28,7 @@
     <group>
       <x-switch v-model="show" :title="title" :inline-desc="author"></x-switch>
     </group>
-    <group>
-      <x-button type="primary" @click.native='getArticle()'>换一篇</x-button>
-    </group>
-    
+    <x-button type="primary" @click.native='getArticle()'>换一篇</x-button>
     <div v-transfer-dom>
       <x-dialog v-model="show" class="dialog-demo" hide-on-blur>
         <div class="content">
