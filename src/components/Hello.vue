@@ -6,23 +6,7 @@
     <group>
       <cell title="">
         <span>{{weather}}</span>
-        <span v-if="weather==='雷阵雨/多云'">
-           <svg class="icon"><use xlink:href="#icon-baofengyu"></use></svg>
-           <svg class="icon"><use xlink:href="#icon-duoyun"></use></svg>
-        </span>
-        <span v-if="weather==='阵雨/多云'">
-           <svg class="icon"><use xlink:href="#icon-baofengyu"></use></svg>
-           <svg class="icon"><use xlink:href="#icon-duoyun"></use></svg>
-        </span>
-        <span v-if="weather==='雷阵雨/雷阵雨'">
-           <svg class="icon"><use xlink:href="#icon-baofengyu"></use></svg>
-        </span>
-        <span v-if="weather==='多云/多云'">
-           <svg class="icon"><use xlink:href="#icon-duoyun"></use></svg>
-        </span>
-        <span v-if="weather==='小雨/小雨'">
-           <svg class="icon"><use xlink:href="#icon-yu"></use></svg>
-        </span>
+        <span class="weatherPng"><img :src="pngUrl"></span>
       </cell>
     </group>
     <group>
@@ -67,7 +51,8 @@ export default {
       cityName:'',
       weather:'',
       plainList: ['佛山', '广州','深圳','汕头'],
-      value1: '佛山'
+      value1: '佛山',
+      pngUrl: ''
     }
   },
   directives: {
@@ -109,19 +94,15 @@ export default {
         })
     },
     getWeather(val) {
-      console.log(val)
       let _this  = this;
-      //CHGD000000 广州
-      //CHGD050000 深圳
-      //CHGD040000 汕头
-      //CHGD070000 佛山
       //build
-      //this.$http.get('http://tj.nineton.cn/Heart/index/all?city='+val)
+      //this.$http.get('https://free-api.heweather.com/v5/weather?city='+val+'&key=85e65ceea7db471f8f16d69b7aca5f3f')
       //dev
-      this.$http.get('/weather/all?city='+val)
+      this.$http.get('/weather/weather?city='+val+'&key=85e65ceea7db471f8f16d69b7aca5f3f')
         .then(function(res){
-          _this.weather = res.data.weather[0].future[0].text;
-          _this.cityName = res.data.weather[0].city_name;
+          _this.weather = res.data.HeWeather5[0].now.cond.txt;
+           _this.pngUrl = 'https://cdn.heweather.com/cond_icon/'+res.data.HeWeather5[0].now.cond.code+'.png';
+          _this.cityName = res.data.HeWeather5[0].basic.city;
         })
     },
     changeArticle() {
@@ -131,19 +112,19 @@ export default {
       switch(val)
       {
       case '佛山':
-        this.getWeather('CHGD070000');
+        this.getWeather('佛山');
         break;
       case '广州':
-        this.getWeather('CHGD000000');
+        this.getWeather('广州');
         break;
       case '深圳':
-        this.getWeather('CHGD050000');
+        this.getWeather('深圳');
         break;
       case '汕头':
-        this.getWeather('CHGD040000');
+        this.getWeather('汕头');
         break;
       default:
-        this.getWeather('CHGD070000');
+        this.getWeather('佛山');
       }
       
     }
@@ -151,12 +132,12 @@ export default {
   mounted() {
     //this.getShit();
     this.getArticle();
-    this.getWeather('CHGD070000');
+    this.getWeather('佛山');
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang='less'>
   .article {
     text-indent: 2em;
     text-align: left;
@@ -170,5 +151,12 @@ export default {
   .icon {
     width: 17px;
     height: 17px;
+  }
+  .weatherPng{
+  	img {
+	  height: 19px;
+	  width: 19px;
+	  margin-bottom: -3px;
+  	}
   }
 </style>

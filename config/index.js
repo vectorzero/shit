@@ -43,7 +43,7 @@ module.exports = {
         }
       },
       '/weather': {
-        target: 'http://tj.nineton.cn/Heart/index/',
+        target: 'https://free-api.heweather.com/v5/',
         changeOrigin: true,
         pathRewrite: {
           '^/weather': ''
