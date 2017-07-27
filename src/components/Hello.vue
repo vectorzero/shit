@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <group>
+    <group>
       <selector v-model="value1" title="城市" :options="plainList" @on-change="onChange"></selector>
     </group>
     <group>
@@ -24,7 +24,7 @@
            <svg class="icon"><use xlink:href="#icon-yu"></use></svg>
         </span>
       </cell>
-    </group> -->
+    </group>
     <group>
       <x-switch v-model="show" :title="title" :inline-desc="author"></x-switch>
     </group>
@@ -151,7 +151,7 @@ export default {
   mounted() {
     //this.getShit();
     this.getArticle();
-    //this.getWeather(this.value1);
+    this.getWeather(this.value1);
   }
 }
 </script>
