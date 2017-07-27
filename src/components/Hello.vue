@@ -151,7 +151,7 @@ export default {
   mounted() {
     //this.getShit();
     this.getArticle();
-    this.getWeather(this.value1);
+    this.getWeather('CHGD070000');
   }
 }
 </script>
